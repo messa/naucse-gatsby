@@ -17,9 +17,7 @@ function IndexPage({ data }) {
           <h3>{runYear.year}</h3>
           {runYear.courses.map(course => (
             <div>
-              <a href={'/' + course.courseId}>
-                {course.title}
-              </a>
+              <Link to={'/' + course.courseId}>{course.title}</Link>
               {' – '}
               {course.subtitle}
             </div>

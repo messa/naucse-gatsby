@@ -15,6 +15,10 @@ function assert(condition, message) {
   }
 }
 
+// TODO: add retry for axios.get
+
+// TODO: add caching: https://www.gatsbyjs.org/docs/build-caching/
+
 exports.sourceNodes = async function ({ actions }) {
   const { createNode } = actions
   const entities = new Map() // by id
@@ -47,6 +51,7 @@ exports.sourceNodes = async function ({ actions }) {
         title: course.title,
         subtitle: course.subtitle,
         description: course.description,
+        longDescription: course.long_description,
         timeDescription: course.time_description,
         url: course.url,
         vars: course.vars,
@@ -55,6 +60,7 @@ exports.sourceNodes = async function ({ actions }) {
         endDate: course.end_date,
         place: course.place,
         sourceFile: course.source_file,
+        apiUrl: courseUrl,
         runYear___NODE: `runYear:${year}`,
         sessions___NODE: [],
       })
