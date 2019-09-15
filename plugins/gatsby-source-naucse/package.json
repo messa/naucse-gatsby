@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "dependencies": {
+    "async-sema": "^3.0.1",
     "cheerio": "^1.0.0"
   }
 }

@@ -4,8 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
-
 const path = require('path')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -34,6 +32,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `)
   const CoursePageTemplate = path.resolve(`src/templates/course-page.js`)
+  const MaterialTemplate = path.resolve(`src/templates/material.js`)
   const runYears = result.data.allRunYear.edges.map(edge => edge.node)
   runYears.map(runYear => {
     runYear.courses.map(course => {
@@ -45,6 +44,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         context: {
           courseId,
         }
+      })
+      course.sessions.map(session => {
+        session.materials.map(material => {
+          if (material.internalUrl) {
+            createPage({
+              path: material.internalUrl,
+              component: MaterialTemplate,
+              context: {
+                internalUrl: material.internalUrl,
+              }
+            })
+          }
+        })
       })
     })
   })
